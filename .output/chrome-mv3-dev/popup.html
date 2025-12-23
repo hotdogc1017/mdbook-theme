@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="module" src="http://localhost:3000/@vite/client"></script>
+<script src="http://localhost:3000/@id/virtual:wxt-html-plugins" type="module"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mdBook Theme Switcher</title>
+    <link rel="stylesheet" href="http://localhost:3000/entrypoints/popup/popup.css">  <script type="module" crossorigin="" src="/chunks/popup-BWk36kL9.js"></script>
+</head>
+  <body>
+    <div class="container">
+      <h1>mdBook Theme</h1>
+
+      <div id="status" class="status"></div>
+
+      <div id="theme-section" class="theme-section">
+        <div class="section-label">Mintlify Style</div>
+        <div class="theme-grid custom-themes">
+          <button class="theme-btn" data-theme="mintlify">
+            <span class="theme-preview mintlify-preview"></span>
+            <span class="theme-name">Mintlify</span>
+          </button>
+          <button class="theme-btn" data-theme="mintlify-dark">
+            <span class="theme-preview mintlify-dark-preview"></span>
+            <span class="theme-name">Mintlify Dark</span>
+          </button>
+        </div>
+
+        <div class="section-label">mdBook Built-in</div>
+        <div class="theme-grid builtin-themes">
+          <button class="theme-btn" data-theme="light">
+            <span class="theme-preview light-preview"></span>
+            <span class="theme-name">Light</span>
+          </button>
+          <button class="theme-btn" data-theme="rust">
+            <span class="theme-preview rust-preview"></span>
+            <span class="theme-name">Rust</span>
+          </button>
+          <button class="theme-btn" data-theme="coal">
+            <span class="theme-preview coal-preview"></span>
+            <span class="theme-name">Coal</span>
+          </button>
+          <button class="theme-btn" data-theme="navy">
+            <span class="theme-preview navy-preview"></span>
+            <span class="theme-name">Navy</span>
+          </button>
+          <button class="theme-btn" data-theme="ayu">
+            <span class="theme-preview ayu-preview"></span>
+            <span class="theme-name">Ayu</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <label class="toggle-label">
+          <input type="checkbox" id="enabled-toggle" checked>
+          <span>Enable extension</span>
+        </label>
+      </div>
+    </div>
+    <script src="http://localhost:3000/entrypoints/popup/main.ts" type="module"></script>
+  </body>
+</html>

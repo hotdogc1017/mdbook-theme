@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": [".wxt/**/*", "entrypoints/**/*", "assets/**/*"]
+  "include": [".wxt/**/*", "entrypoints/**/*", "assets/**/*", "env.d.ts"]
 }
