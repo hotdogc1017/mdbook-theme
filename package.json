@@ -1,0 +1,21 @@
+{
+  "name": "mdbook-theme",
+  "description": "Browser extension to modify mdbook website themes",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "rimraf .output && wxt build",
+    "build:firefox": "rimraf .output && wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "postinstall": "wxt prepare"
+  },
+  "devDependencies": {
+    "rimraf": "^6.1.2",
+    "typescript": "^5.7.2",
+    "wxt": "^0.20.13"
+  }
+}
