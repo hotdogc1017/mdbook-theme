@@ -15,6 +15,8 @@
     --code-fg: #e5e7eb;
     --quote-bg: #f3f6f4;
     --quote-border: #26bd6c;
+    --quote-block-border: rgb(16 185 129 / 0.2);
+    --quote-block-bg: rgb(236 253 245 / 0.5);
     --table-border: #e5e7eb;
     --table-header-bg: #f3f6f4;
     --search-bg: #ffffff;
@@ -187,15 +189,23 @@ pre code {
 
 /* Blockquotes */
 blockquote {
-    background: var(--quote-bg);
-    border-left: 4px solid var(--quote-border);
+    background: var(--quote-block-bg);
+    border: 1px solid var(--quote-block-border);
     margin: 1.5em 0;
-    padding: 16px 20px;
-    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
 }
 
 blockquote p {
     margin: 0;
+}
+blockquote h1,
+blockquote h2,
+blockquote h3,
+blockquote h4,
+blockquote h5 {
+    margin: 0;
+    margin-bottom: 1em;
 }
 
 /* Tables */
