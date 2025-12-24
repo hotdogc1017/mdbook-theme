@@ -26,12 +26,23 @@
     --order-display: none;
     --chapter-nav-display: none;
     --sidebar-text-size: 16px;
+    --body-text-color: rgb(63, 65, 64);
+    --text-color: rgb(17, 24, 39);
+    --content-size: 36rem;
+    --root-font-size: 18px;
+    --mono-font:
+        "Geist Mono", "Menlo", "Monaco", "Lucida Console", "Liberation Mono",
+        "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+    font-size: var(--root-font-size);
 }
 
 :not(pre) > code.hljs {
     background-color: var(--inline-code-color);
-    color: rgb(17, 24, 39);
+    color: var(--text-color);
     font-weight: 500;
+    box-sizing: border-box;
+    padding: 0.125rem 0.5rem;
+    margin: 0 0.125rem;
 }
 
 html {
@@ -43,13 +54,14 @@ html {
         Roboto,
         sans-serif;
     background: var(--bg);
-    color: var(--fg);
+    color: var(--text-color);
     height: 100dvh;
 }
 
 body {
     background: var(--bg);
-    color: var(--fg);
+    color: var(--body-text-color);
+    font-size: inherit;
 }
 
 nav.nav-wide-wrapper a.nav-chapters {
@@ -106,20 +118,20 @@ h6 {
     line-height: 1.3;
 }
 
-h1 {
-    font-size: 2.25rem;
+h1.menu-title {
+    font-size: 1.75em;
     margin-top: 0;
 }
 h2 {
-    font-size: 1.75rem;
+    font-size: 1.5em;
     border-bottom: 1px solid var(--table-border);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.5em;
 }
 h3 {
-    font-size: 1.375rem;
+    font-size: 1.25em;
 }
 h4 {
-    font-size: 1.125rem;
+    font-size: 1em;
 }
 
 p {
@@ -277,19 +289,45 @@ tr:last-child td {
     background: var(--sidebar-active-bg);
 }
 
+div#mdbook-menu-bar,
+div#mdbook-menu-bar-hover-placeholder {
+    box-sizing: border-box;
+    padding: 1rem 0;
+}
+
 div#mdbook-content {
     max-height: calc(100vh - 80px);
     box-sizing: border-box;
     padding: 2rem 4rem;
     display: grid;
-    grid-template-columns: 1fr 36rem;
+    grid-template-columns: var(--content-size) 28rem;
+    justify-content: center;
     gap: 3rem;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
 
+div#mdbook-content p {
+    line-height: 1.75;
+}
+
 div#mdbook-content main {
     max-width: 100%;
+}
+
+div#mdbook-content main a.header:hover,
+div#mdbook-content main a {
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    text-decoration: none;
+}
+div#mdbook-content main a:hover {
+    border-bottom-width: 2px;
+}
+
+div#mdbook-content main a.header {
+    border-bottom: none;
 }
 
 /* Right Sidebar (TOC) */
