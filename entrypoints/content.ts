@@ -1,9 +1,6 @@
-// Content script for mdBook theme modification
-// import "../assets/themes/mintlify-light.css";
-// import "../assets/themes/mintlify-dark.css";
-// Import CSS as raw strings at build time
-import mintlifyLightCSS from "../assets/themes/mintlify-light.css?raw";
-import mintlifyDarkCSS from "../assets/themes/mintlify-dark.css?raw";
+import mintlify from "../assets/themes/mintlify.css?raw";
+// import mintlifyLightCSS from "../assets/themes/mintlify-light.css?raw";
+// import mintlifyDarkCSS from "../assets/themes/mintlify-dark.css?raw";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
@@ -45,9 +42,9 @@ export default defineContentScript({
     function getThemeCSS(theme: Theme): string | null {
       switch (theme) {
         case "mintlify":
-          return mintlifyLightCSS;
-        case "mintlify-dark":
-          return mintlifyDarkCSS;
+          return mintlify;
+        // case "mintlify-dark":
+        //   return mintlifyDarkCSS;
         default:
           return null; // Use mdBook built-in themes
       }
@@ -184,8 +181,8 @@ export default defineContentScript({
             });
 
             observer.observe(document.body, {
-              childList: true, // 监听子节点的新增或删除
-              subtree: true, // 监听整个子树
+              childList: true,
+              subtree: true,
             });
           },
         });
