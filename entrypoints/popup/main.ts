@@ -18,7 +18,7 @@ async function init() {
   statusEl.className = "status detecting";
 
   // Load enabled state
-  const { enabled = true } = (await browser.storage.local.get(
+  const { enabled = false } = (await browser.storage.local.get(
     "enabled",
   )) as Awaited<{ enabled: boolean }>;
   enabledToggle.checked = enabled;
@@ -41,10 +41,10 @@ async function init() {
     if (response?.isMdBook) {
       showMdBook();
     } else {
-      showNotMdBook("Not an mdBook site");
+      showNotMdBook(`Not an mdBook site`);
     }
   } catch {
-    showNotMdBook("Not an mdBook site");
+    showNotMdBook("Not an mdBook site with error");
   }
 }
 

@@ -120,11 +120,11 @@ export default defineContentScript({
     }
 
     // Listen for theme change messages from popup
-    browser.runtime.onMessage.addListener((message) => {
+    browser.runtime.onMessage.addListener((message, _, sendResponse) => {
       if (message.type === "setTheme" && ALL_THEMES.includes(message.theme)) {
         applyTheme(message.theme);
       } else if (message.type === "getStatus") {
-        return Promise.resolve({
+        sendResponse({
           isMdBook,
           currentTheme: getCurrentMdBookTheme(),
         });
@@ -161,7 +161,7 @@ export default defineContentScript({
     function init() {
       isMdBook = checkMdBookComment();
       if (isMdBook) {
-        localStorage.setItem("enabled", "true");
+        localStorage.setItem("enabled", "false");
         initTheme();
 
         const ui = createIntegratedUi(ctx, {
