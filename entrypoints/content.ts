@@ -1,4 +1,6 @@
 // Content script for mdBook theme modification
+// import "../assets/themes/mintlify-light.css";
+// import "../assets/themes/mintlify-dark.css";
 // Import CSS as raw strings at build time
 import mintlifyLightCSS from "../assets/themes/mintlify-light.css?raw";
 import mintlifyDarkCSS from "../assets/themes/mintlify-dark.css?raw";
@@ -7,7 +9,7 @@ export default defineContentScript({
   matches: ["<all_urls>"],
   runAt: "document_start",
 
-  main() {
+  main(ctx) {
     // Custom themes (Mintlify-inspired + mdBook built-in)
     const CUSTOM_THEMES = ["mintlify", "mintlify-dark"] as const;
     const MDBOOK_THEMES = ["light", "rust", "coal", "navy", "ayu"] as const;
@@ -132,12 +134,62 @@ export default defineContentScript({
       }
     });
 
+    // Create and setup right sidebar for page TOC
+    function setupRightSidebar(tocSection: Element) {
+      if (!tocSection) return;
+
+      // Create right sidebar container
+      const rightSidebar = document.createElement("nav");
+      rightSidebar.id = "right-sidebar";
+      rightSidebar.className = "right-sidebar";
+
+      // Create header
+      const header = document.createElement("div");
+      header.className = "right-sidebar-header";
+      header.textContent = "On this page";
+      rightSidebar.appendChild(header);
+
+      // Clone and move the section
+      const clonedSection = tocSection.cloneNode(true) as Element;
+      clonedSection.classList.add("right-sidebar-toc");
+      rightSidebar.appendChild(clonedSection);
+
+      // Hide original section in left sidebar
+      (tocSection as HTMLElement).style.display = "none";
+
+      return rightSidebar;
+    }
+
     // Main initialization
     function init() {
       isMdBook = checkMdBookComment();
       if (isMdBook) {
         localStorage.setItem("enabled", "true");
         initTheme();
+
+        const ui = createIntegratedUi(ctx, {
+          position: "inline",
+          anchor: "div#mdbook-content",
+          onMount: (pageWrapper) => {
+            const observer = new MutationObserver((_, obs) => {
+              const element = document.querySelector(
+                ".sidebar ol.chapter div.on-this-page > ol.section",
+              );
+              if (element) {
+                const rightSidebar = setupRightSidebar(element)!;
+                pageWrapper.append(rightSidebar);
+                pageWrapper.classList.add("has-right-sidebar");
+                obs.disconnect();
+              }
+            });
+
+            observer.observe(document.body, {
+              childList: true, // 监听子节点的新增或删除
+              subtree: true, // 监听整个子树
+            });
+          },
+        });
+        ui.autoMount();
       }
     }
 
