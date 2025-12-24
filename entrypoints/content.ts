@@ -105,9 +105,13 @@ export default defineContentScript({
         type LocalConfig = {
           [K in (typeof localConfig)[number]]?: string;
         };
-        const { mdbookTheme } = (await browser.storage.local.get(
+        const { mdbookTheme, enabled } = (await browser.storage.local.get(
           localConfig as any,
         )) as LocalConfig;
+
+        if (!enabled) {
+          return;
+        }
 
         const theme = mdbookTheme || ("mintlify" as any); // Default to mintlify
         if (ALL_THEMES.includes(theme)) {
