@@ -80,11 +80,13 @@ nav.nav-wide-wrapper a.nav-chapters {
     background: var(--sidebar-bg);
 }
 
+li.chapter-item:not(:has(span.chapter-link-wrapper)) a,
 span.chapter-link-wrapper a {
     display: block;
     width: 100%;
     height: 100%;
 }
+li.chapter-item:not(:has(span.chapter-link-wrapper)),
 span.chapter-link-wrapper {
     cursor: pointer;
     color: var(--sidebar-fg);
@@ -99,6 +101,8 @@ span.chapter-link-wrapper {
 }*/
 
 /*.sidebar ol.chapter li .chapter-item.expanded > a,*/
+li.chapter-item:not(:has(span.chapter-link-wrapper)):hover,
+li.chapter-item:not(:has(span.chapter-link-wrapper)):has(a.active),
 span.chapter-link-wrapper:has(a.active),
 span.chapter-link-wrapper:hover {
     background: var(--sidebar-active-bg);
@@ -188,6 +192,7 @@ pre code {
 }
 
 /* Blockquotes */
+section[aria-role="note"],
 blockquote {
     background: var(--quote-block-bg);
     border: 1px solid var(--quote-block-border);
@@ -196,14 +201,14 @@ blockquote {
     border-radius: 1rem;
 }
 
-blockquote p {
+:is(blockquote, section[aria-role="note"]) p {
     margin: 0;
 }
-blockquote h1,
-blockquote h2,
-blockquote h3,
-blockquote h4,
-blockquote h5 {
+:is(blockquote, section[aria-role="note"]) h1,
+:is(blockquote, section[aria-role="note"]) h2,
+:is(blockquote, section[aria-role="note"]) h3,
+:is(blockquote, section[aria-role="note"]) h4,
+:is(blockquote, section[aria-role="note"]) h5 {
     margin: 0;
     margin-bottom: 1em;
 }
@@ -305,7 +310,8 @@ div#mdbook-menu-bar-hover-placeholder {
     padding: 1rem 0;
 }
 
-div#mdbook-content {
+div#mdbook-content,
+div#content {
     max-height: calc(100vh - 80px);
     box-sizing: border-box;
     padding: 2rem 4rem;
@@ -317,26 +323,27 @@ div#mdbook-content {
     scroll-behavior: smooth;
 }
 
-div#mdbook-content p {
+:is(div#mdbook-content, div#content) p {
     line-height: 1.75;
 }
 
-div#mdbook-content main {
+:is(div#mdbook-content, div#content) main {
     max-width: 100%;
+    /*letter-spacing: 0.5px;*/
 }
 
-div#mdbook-content main a.header:hover,
-div#mdbook-content main a {
+:is(div#mdbook-content, div#content) main a.header:hover,
+:is(div#mdbook-content, div#content) main a {
     font-weight: 600;
     color: var(--text-color);
     border-bottom: 1px solid var(--text-color);
     text-decoration: none;
 }
-div#mdbook-content main a:hover {
+:is(div#mdbook-content, div#content) main a:hover {
     border-bottom-width: 2px;
 }
 
-div#mdbook-content main a.header {
+:is(div#mdbook-content, div#content) main a.header {
     border-bottom: none;
 }
 
